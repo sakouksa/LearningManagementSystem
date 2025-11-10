@@ -1,0 +1,9 @@
+$(document).ready(function () {
+  $('#name').on('input', function () {
+    var name = $(this).val();
+    var slug = name.toLowerCase() // បម្លែងអក្សរទាំងអស់ទៅជាតួអក្សរតូច
+      .replace(/ /g, '-')        // ប្តូរទីតាំងដែលមាន space ជា dash "-"
+      .replace(/[^\w-]+/g, '')    // ត្រូវការលុបអក្សរដែលមិនត្រឹមត្រូវ
+    $('#slug').val(slug);
+  })
+})

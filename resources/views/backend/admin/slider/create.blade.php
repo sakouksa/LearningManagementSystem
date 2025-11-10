@@ -1,0 +1,127 @@
+@extends('backend.admin.master')
+
+@section('title', 'LMS Admins Dashboard')
+
+@section('content')
+    <div class="page-content">
+        {{-- breadcrumb --}}
+        @include('backend.section.breadcrumb', ['title' => 'Slider', 'sub_title' => 'Add-Sliders'])
+        {{-- end breadcrumb --}}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body p-4">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <h5 class="mb-4">Add Slider</h5>
+                            <a href="{{ route('admin.slider.index') }}"
+                                class="btn btn-danger btn-sm d-flex align-items-center gap-1 px-3 py-2 shadow-sm">
+                                <i class="bi bi-arrow-left-circle fs-6"></i>
+                                <span>Back</span>
+                            </a>
+                        </div>
+
+                        <form class="row g-3" method="POST" action="{{ route('admin.slider.store') }}"
+                            enctype="multipart/form-data">
+                            @csrf
+                            {{-- Validation Errors --}}
+                            @if ($errors->any())
+                                <div class="alert alert-danger alert-dismissible fade show d-flex align-items-center"
+                                    role="alert">
+                                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                                    <div>
+                                        <ul class="mb-0">
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                    <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                            @endif
+                            {{-- end Validation Errors --}}
+                            <div class="col-md-12">
+                                <label for="title" class="form-label">Slider Title</label>
+                                <input type="text" class="form-control @error('title') is-invalid @enderror"
+                                    name="title" id="title" placeholder="Slider Title" value="{{ old('title') }}">
+                                @error('title')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-12">
+                                <label for="short_description" class="form-label">Short Description</label>
+                                <textarea class="form-control @error('short_description') is-invalid @enderror" name="short_description"
+                                    id="short_description" rows="5" placeholder="Enter Short Description">{{ old('short_description') }}</textarea>
+                                @error('short_description')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-12">
+                                <label for="video_url" class="form-label">Video Url</label>
+                                <input type="text" class="form-control" name="video_url" id="video_url"
+                                    placeholder="Enter the Video Url" value="{{ old('video_url') }}">
+                                @error('video_url')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="col-md-12">
+                                <iframe id="videoPreview" style="margin-top:15px; display:none; width:50%; height:400px"
+                                    src="" frameborder="0" allowfullscreen></iframe>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="image" class="form-label">Background Image</label>
+                                <input type="file" class="form-control" name="image" id="Photo">
+                            </div>
+                            <div class="col-md-12">
+                                <img id="photoPreview" width="100%" height="100%"
+                                    style="margin-top:15px; display:none; border:1px solid #ddd; border-radius:6px; padding:4px;">
+                            </div>
+
+                            <div class="col-12 d-flex justify-content-end">
+                                <button type="submit"
+                                    class="btn btn-primary btn-sm d-flex align-items-center gap-1 px-3 py-2 shadow-sm"
+                                    style="transition: 0.3s;">
+                                    <i class="bi bi-floppy-fill fs-6"></i>
+                                    <span>Save</span>
+                                </button>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            @endsection
+            @push('scripts')
+                <script>
+                    document.getElementById('video_url').addEventListener('input', function() {
+                        const videoUrl = this.value; // ទទួល YouTube URL ពី input
+                        const videoPreview = document.getElementById('videoPreview'); // ទទួល iframe element
+
+                        if (videoUrl) {
+                            // ដកយក YouTube video ID ពី URL
+                            const videoId = extractYouTubeID(videoUrl);
+
+                            if (videoId) {
+                                // បើ URL ត្រឹមត្រូវ បង្ហាញវីដេអូ
+                                videoPreview.src = `https://www.youtube.com/embed/${videoId}`;
+                                videoPreview.style.display = 'block';
+                            } else {
+                                // បើ URL មិនត្រឹមត្រូវ បង្ហាញ alert ហើយលាក់ iframe
+                                alert('Invalid YouTube URL!');
+                                videoPreview.style.display = 'none';
+                                videoPreview.src = '';
+                            }
+                        } else {
+                            // បើ input ទទេ លាក់ iframe
+                            videoPreview.style.display = 'none';
+                            videoPreview.src = '';
+                        }
+                    });
+
+                    function extractYouTubeID(url) {
+                        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#&?]*).*/;
+                        const match = url.match(regExp);
+                        return (match && match[2].length === 11) ? match[2] : null;
+                    }
+                </script>
+            @endpush
