@@ -134,11 +134,8 @@
                                                                         <i class="la la-power-off mr-1"></i> Logout
                                                                     </a>
                                                                 </li>
-                                                                <form id="logout-form" action="user/logout"
-                                                                    method="POST" style="display: none;">
-                                                                    <input type="hidden" name="_token"
-                                                                        value="PQOzwOF7JjqpCldcL5h1bbn5NFSoEtlm386eK2et"
-                                                                        autocomplete="off">
+                                                                <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;" >
+                                                                 @csrf
                                                                 </form>
                                                             </ul>
                                                         </li>
@@ -174,7 +171,6 @@
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Log out</a>
                 </li>
             </ul>
-
 
         </div> {{-- end off-canvas-menu --}}
 
