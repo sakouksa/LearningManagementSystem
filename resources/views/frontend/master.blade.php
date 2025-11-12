@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>learning management system</title>
+    <title>s-Learning System UHST</title>
     @include('frontend.section.link')
 </head>
 <body>
