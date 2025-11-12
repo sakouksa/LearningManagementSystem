@@ -3,12 +3,15 @@
 
 <head>
     @include('backend.section.link')
-    <title>@yield('title', 'LMS Instructor Dashboard')</title>
+
+    <title> @yield('title', 'Instructor Dashboards|s-Learning System UHST')</title>
+
 
 </head>
 <style>
-    
+
 </style>
+
 <body>
     <div class="wrapper">
         {{-- include sidebar --}}

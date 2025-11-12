@@ -7,12 +7,12 @@ use App\Http\Controllers\backend\CategoryController;
 use App\Http\Controllers\backend\CourseController;
 use App\Http\Controllers\backend\CourseSectionController;
 use App\Http\Controllers\backend\InfoController;
-use App\Http\Controllers\Backend\InstructorController;
 use App\Http\Controllers\backend\InstructorProfileController;
 use App\Http\Controllers\backend\instuctorController;
 use App\Http\Controllers\backend\LectureController;
 use App\Http\Controllers\backend\SliderController;
 use App\Http\Controllers\backend\SubCategoryController;
+use App\Http\Controllers\backend\UserController;
 use App\Http\Controllers\frontend\FrontendDashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -69,6 +69,13 @@ Route::middleware(['auth', 'verified', 'role:instructor'])->prefix('instructor')
     Route::resource('lecture', LectureController::class);
 });
 // end instuctor => Teacher
+
+// start User Modal list
+Route::middleware(['auth', 'verified', 'role:user'])->prefix('user')->name('user.')->group(function () {
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
+    Route::post('/logout', [UserController::class, 'destroy'])->name('logout');
+});
+// End start User
 
 // Frontend Route
 Route::get('/', [FrontendDashboardController::class, 'home'])->name('frontend.home');

@@ -1,49 +1,3 @@
-{{-- <x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>f
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout> --}}
-
 @extends('frontend.master')
 
 @section('content')
@@ -61,12 +15,12 @@
                     <li>Pages</li>
                     <li>Login</li>
                 </ul>
-            </div><!-- end breadcrumb-content -->
-        </div><!-- end container -->
-    </section><!-- end breadcrumb-area -->
+            </div>
+        </div>
+    </section>
     {{-- END BREADCRUMB AREA --}}
 
-    {{-- START CONTACT AREA --}}
+    {{-- START LOGIN AREA --}}
     <section class="contact-area section--padding position-relative">
         <span class="ring-shape ring-shape-1"></span>
         <span class="ring-shape ring-shape-2"></span>
@@ -75,6 +29,7 @@
         <span class="ring-shape ring-shape-5"></span>
         <span class="ring-shape ring-shape-6"></span>
         <span class="ring-shape ring-shape-7"></span>
+
         <div class="container">
             <div class="row">
                 <div class="col-lg-7 mx-auto">
@@ -82,32 +37,48 @@
                         <div class="card-body">
                             <h3 class="card-title text-center fs-24 lh-35 pb-4">Login to Your Account!</h3>
                             <div class="section-block"></div>
-                            <form method="post" class="pt-4">
-                                <div class="d-flex flex-wrap align-items-center pb-4">
-                                    <button class="btn theme-btn flex-grow-1 mx-2 mb-2"><i
-                                            class="la la-google mr-2"></i>Google</button>
-                                    <button class="btn theme-btn flex-grow-1 mx-2 mb-2"><i
-                                            class="la la-facebook mr-2"></i>Facebook</button>
-                                    <button class="btn theme-btn flex-grow-1 mx-2 mb-2"><i
-                                            class="la la-twitter mr-2"></i>Twitter</button>
+
+                            <!-- Session Status -->
+                            @if (session('status'))
+                                <div class="alert alert-success text-center mt-3">
+                                    {{ session('status') }}
                                 </div>
+                            @endif
+
+                            <form method="POST" class="pt-4" action="{{ route('login') }}">
+                                @csrf
+
+                                {{-- SOCIAL LOGIN (Optional) --}}
+                                <div class="d-flex flex-wrap align-items-center pb-4">
+                                    <button type="button" class="btn theme-btn flex-grow-1 mx-2 mb-2">
+                                        <i class="la la-google mr-2"></i>Login with Google
+                                    </button>
+                                </div>
+
                                 <div class="text-center pt-3 pb-4">
                                     <div class="icon-element icon-element-md fs-25 shadow-sm">Or</div>
                                 </div>
+
+                                {{-- EMAIL FIELD --}}
                                 <div class="input-box">
-                                    <label class="label-text">Email or Username</label>
+                                    <label class="label-text">Email</label>
                                     <div class="form-group">
-                                        <input class="form-control form--control" type="text" name="name"
-                                            placeholder="Email or Username">
+                                        <input id="email" class="form-control form--control" type="email"
+                                            name="email" placeholder="Enter your email" value="{{ old('email') }}"
+                                            required autofocus autocomplete="username">
                                         <span class="la la-user input-icon"></span>
+                                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                     </div>
-                                </div><!-- end input-box -->
+                                </div>
+
+                                {{-- PASSWORD FIELD --}}
                                 <div class="input-box">
                                     <label class="label-text">Password</label>
                                     <div class="input-group mb-3">
                                         <span class="la la-lock input-icon"></span>
-                                        <input class="form-control form--control password-field" type="password"
-                                            name="password" placeholder="Password">
+                                        <input id="password" class="form-control form--control password-field"
+                                            type="password" name="password" placeholder="Enter your password" required
+                                            autocomplete="current-password">
                                         <div class="input-group-append">
                                             <button class="btn theme-btn theme-btn-transparent toggle-password"
                                                 type="button">
@@ -127,22 +98,36 @@
                                             </button>
                                         </div>
                                     </div>
-                                </div><!-- end input-box -->
+                                    <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                                </div>
+
+                                {{-- REMEMBER ME + FORGOT PASSWORD --}}
                                 <div class="btn-box">
                                     <div class="d-flex align-items-center justify-content-between pb-4">
                                         <div class="custom-control custom-checkbox fs-15">
-                                            <input type="checkbox" class="custom-control-input" id="rememberMeCheckbox"
-                                                required>
+                                            <input id="remember_me" type="checkbox" class="custom-control-input"
+                                                name="remember">
                                             <label class="custom-control-label custom--control-label"
-                                                for="rememberMeCheckbox">Remember Me</label>
-                                        </div><!-- end custom-control -->
-                                        <a href="recover.html" class="btn-text">Forgot my password?</a>
+                                                for="remember_me">Remember Me</label>
+                                        </div>
+
+                                        @if (Route::has('password.request'))
+                                            <a href="{{ route('password.request') }}" class="btn-text">
+                                                Forgot your password?
+                                            </a>
+                                        @endif
                                     </div>
-                                    <button class="btn theme-btn" type="submit">Login Account <i
-                                            class="la la-arrow-right icon ml-1"></i></button>
-                                    <p class="fs-14 pt-2">Don't have an account? <a href="{{ route('register') }}"
-                                            class="text-color hover-underline">Register</a></p>
-                                </div><!-- end btn-box -->
+
+                                    {{-- SUBMIT BUTTON --}}
+                                    <button class="btn theme-btn" type="submit">
+                                        Login Account <i class="la la-arrow-right icon ml-1"></i>
+                                    </button>
+
+                                    <p class="fs-14 pt-2">
+                                        Don't have an account?
+                                        <a href="{{ route('register') }}" class="text-color hover-underline">Register</a>
+                                    </p>
+                                </div>
                             </form>
                         </div><!-- end card-body -->
                     </div><!-- end card -->

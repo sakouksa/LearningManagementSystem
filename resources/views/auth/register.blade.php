@@ -1,57 +1,3 @@
-{{-- <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
-        @csrf
-
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
-        </div>
-
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout> --}}
-
-
 @extends('frontend.master')
 @section('content')
     {{-- START BREADCRUMB AREA --}}
@@ -68,9 +14,9 @@
                     <li>Pages</li>
                     <li>Sign Up</li>
                 </ul>
-            </div><!-- end breadcrumb-content -->
-        </div><!-- end container -->
-    </section><!-- end breadcrumb-area -->
+            </div>{{-- end breadcrumb-content --}}
+        </div>{{-- end container --}}
+    </section>{{-- end breadcrumb-area --}}
     {{-- END BREADCRUMB AREA --}}
 
     {{-- START CONTACT AREA --}}
@@ -90,7 +36,8 @@
                             <h3 class="card-title text-center fs-24 lh-35 pb-4">Create an Account and <br> Start
                                 Learning!</h3>
                             <div class="section-block"></div>
-                            <form method="post" class="pt-4">
+                            <form method="POST" class="pt-4" action="{{ route('register') }}">
+                                @csrf
                                 <div class="input-box">
                                     <label class="label-text"> Name</label>
                                     <div class="form-group">
@@ -99,7 +46,7 @@
                                         <span class="la la-user input-icon"></span>
                                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                                     </div>
-                                </div><!-- end input-box -->
+                                </div>{{-- end input-box --}}
                                 <div class="input-box">
                                     <label class="label-text">Email Address</label>
                                     <div class="form-group">
@@ -109,7 +56,7 @@
                                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
 
                                     </div>
-                                </div><!-- end input-box -->
+                                </div>{{-- end input-box --}}
                                 <div class="input-box">
                                     <label class="label-text">Password</label>
                                     <div class="input-group mb-3">
@@ -137,7 +84,7 @@
                                     </div>
                                     <x-input-error :messages="$errors->get('password')" class="mt-2" />
 
-                                </div><!-- end input-box -->
+                                </div>{{-- end input-box --}}
                                 <div class="input-box">
                                     <label class="label-text">Confirm Password</label>
                                     <div class="input-group mb-3">
@@ -149,34 +96,34 @@
                                 </div>
 
                                 <div class="btn-box">
-                                    <div class="custom-control custom-checkbox mb-2 fs-15">
-                                        <input type="checkbox" class="custom-control-input" id="receiveCheckbox" required>
-                                        <label class="custom-control-label custom--control-label lh-20"
-                                            for="receiveCheckbox">Yes! I want to get the most out of Aduca by receiving
-                                            emails with exclusive deals, personal recommendations and learning
-                                            tips!</label>
-                                    </div><!-- end custom-control -->
-                                    <div class="custom-control custom-checkbox mb-4 fs-15">
+                                    <div class="custom-control custom-checkbox mb-4 s-15">
                                         <input type="checkbox" class="custom-control-input" id="agreeCheckbox" required>
-                                        <label class="custom-control-label custom--control-label" for="agreeCheckbox">by
-                                            signing i agree to the
-                                            <a href="terms-and-conditions.html" class="text-color hover-underline">terms
-                                                and conditions</a> and
+                                        <label class="custom-control-label custom--control-label" for="agreeCheckbox">
+                                            By signing, I agree to the
+                                            <a href="terms-and-conditions.html" class="text-color hover-underline">terms and
+                                                conditions</a>
+                                            and
                                             <a href="privacy-policy.html" class="text-color hover-underline">privacy
-                                                policy</a>
+                                                policy</a>.
                                         </label>
                                     </div><!-- end custom-control -->
-                                    <button class="btn theme-btn" type="submit">Register Account <i
-                                            class="la la-arrow-right icon ml-1"></i></button>
-                                    <p class="fs-14 pt-2">Already have an account? <a href="{{ route('login') }}"
-                                            class="text-color hover-underline">Log in</a></p>
+
+                                    <button class="btn theme-btn" type="submit">
+                                        Register Account <i class="la la-arrow-right icon ml-1"></i>
+                                    </button>
+
+                                    <p class="fs-14 pt-2">
+                                        Already have an account?
+                                        <a href="{{ route('login') }}" class="text-color hover-underline">Log in</a>
+                                    </p>
                                 </div><!-- end btn-box -->
+
                             </form>
-                        </div><!-- end card-body -->
-                    </div><!-- end card -->
-                </div><!-- end col-lg-7 -->
-            </div><!-- end row -->
-        </div><!-- end container -->
-    </section><!-- end contact-area -->
+                        </div>{{-- end card-body --}}
+                    </div>{{-- end card --}}
+                </div>{{-- end col-lg-7 --}}
+            </div>{{-- end row --}}
+        </div>{{-- end container --}}
+    </section>{{-- end contact-area --}}
     {{-- END CONTACT AREA --}}
 @endsection

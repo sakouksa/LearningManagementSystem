@@ -5,7 +5,7 @@
     {{-- include link --}}
     @include('backend.section.link')
     {{-- end include link --}}
-    <title>@yield('title', 'LMS Admin Dashboard')</title>
+    <title> @yield('title', 'Admin Dashboard|s-Learning System UHST')</title>
 
     {{-- Theme Style --}}
     <style>
