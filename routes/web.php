@@ -13,6 +13,7 @@ use App\Http\Controllers\backend\LectureController;
 use App\Http\Controllers\backend\SliderController;
 use App\Http\Controllers\backend\SubCategoryController;
 use App\Http\Controllers\backend\UserController;
+use App\Http\Controllers\backend\UserProfileController;
 use App\Http\Controllers\frontend\FrontendDashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -74,6 +75,13 @@ Route::middleware(['auth', 'verified', 'role:instructor'])->prefix('instructor')
 Route::middleware(['auth', 'verified', 'role:user'])->prefix('user')->name('user.')->group(function () {
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('dashboard');
     Route::post('/logout', [UserController::class, 'destroy'])->name('logout');
+
+    // Profile routes
+    Route::get('/profile', [UserProfileController::class, 'index'])->name('profile');
+    Route::post('/profile/store', [UserProfileController::class, 'store'])->name('profile.store');
+    // Update password
+    Route::post('/password/setting', [UserProfileController::class, 'passwordSetting'])->name('passwordSetting');
+
 });
 // End start User
 

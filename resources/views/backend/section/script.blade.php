@@ -78,7 +78,7 @@
 {{-- app JS --}}
 <script src="{{ asset('backend/assets/js/app.js') }}"></script>
 {{-- end app JS --}}
-<!-- Sweet alert toast script -->
+{{-- Sweet alert toast script --}}
 <script>
     @if (session('success'))
         Swal.fire({

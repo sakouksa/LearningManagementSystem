@@ -1,4 +1,3 @@
-
 <div class="tab-pane fade" id="password" role="tabpanel" aria-labelledby="password-tab">
     <div class="setting-body">
 
@@ -13,7 +12,7 @@
         @endif
 
         <h3 class="fs-17 font-weight-semi-bold pb-4">Change Password </h3>
-        <form method="post" class="row" action="{{route('user.passwordSetting')}}">
+        <form method="post" class="row" action="{{ route('user.passwordSetting') }}">
             @csrf
             <div class="input-box col-lg-4">
                 <label class="label-text">Old Password</label>

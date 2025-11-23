@@ -8,7 +8,7 @@
         @include('backend.section.breadcrumb', ['title' => 'Category', 'sub_title' => 'Update-Categories'])
         {{-- end breadcrumb --}}
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-body p-4">
                         <div style="display: flex; align-items: center; justify-content: space-between;">
@@ -53,16 +53,43 @@
                                 <input type="text" class="form-control" name="slug" id="slug"
                                     value="{{ $category->slug }}" placeholder="Create Unique Slug">
                             </div>
-                            {{-- image --}}
+
+                            {{-- Image Upload --}}
                             <div class="col-md-6">
-                                <label for="image" class="form-label">Image</label>
-                                <input type="file" class="form-control" name="image" id="Photo">
+                                <label class="form-label fw-semibold">Category Image</label>
+
+                                <div class="upload-box text-center p-4 rounded-4 border shadow-sm position-relative"
+                                    style="cursor: pointer; transition: 0.3s;"
+                                    onmouseover="this.style.background='#e9f5ff';"
+                                    onmouseout="this.style.background='#fff';"
+                                    onclick="document.getElementById('Photo').click()">
+
+                                    <input type="file" name="photo" id="Photo" accept="image/*" class="d-none">
+
+                                    <i class="bi bi-cloud-arrow-up-fill fs-1 text-primary"></i>
+
+                                    <p class="mt-2 mb-0 fw-semibold text-secondary">Click to Upload Image</p>
+                                    <span class="text-muted" style="font-size: 13px;">(JPG/PNG - Max 5MB)</span>
+
+                                    {{-- Optional: Hover overlay icon --}}
+                                    <div class="position-absolute top-0 start-0 w-100 h-100 rounded-4"
+                                        style="pointer-events: none;"></div>
+                                </div>
                             </div>
+
+                            {{-- Image Preview --}}
                             <div class="col-md-6">
-                                <img src="{{ $category->image ? asset($category->image) : '' }}" id="photoPreview"
-                                    width="80" height="80"
-                                    style="margin-top:15px; border:1px solid #ddd; border-radius:6px; padding:4px;">
+                                <label class="form-label fw-semibold">Preview</label>
+                                <div id="previewContainer"
+                                    class="border rounded-4 p-2 shadow-sm d-flex justify-content-center align-items-center"
+                                    style="width: 100%; height: 280px; background: #f8f9fa;">
+                                    <img src="{{ $category->image ? asset($category->image) : '' }}" id="photoPreview"
+                                        class="rounded-4"
+                                        style="display: {{ $category->image ? 'block' : 'none' }}; width: 100%; height: 100%; object-fit: cover;">
+                                </div>
                             </div>
+    
+
                             {{-- submit button --}}
                             <div class="col-12 d-flex justify-content-end">
                                 <button type="submit"

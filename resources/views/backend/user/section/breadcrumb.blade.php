@@ -1,7 +1,8 @@
 <div class="breadcrumb-content d-flex flex-wrap align-items-center justify-content-between mb-5">
     <div class="media media-card align-items-center">
         <div class="media-img media--img media-img-md rounded-full">
-            <img class="rounded-full" src="{{ asset('backend/assets/images/avatars/avatar-1.png') }}"
+            <img class="rounded-full"
+                src="{{ auth()->user()->photo ? asset(auth()->user()->photo) : asset('backend/assets/images/avatars/avatar-1.png') }}"
                 alt="Student thumbnail image">
         </div>
         <div class="media-body">

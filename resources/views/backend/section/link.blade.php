@@ -28,12 +28,10 @@
  <link rel="stylesheet" href="{{ asset('backend/assets/css/semi-dark.css') }}" />
  <link rel="stylesheet" href="{{ asset('backend/assets/css/header-colors.css') }}" />
  {{-- end Theme Style CSS --}}
- <!-- Bootstrap Icons CDN -->
+ {{-- Bootstrap Icons CDN --}}
  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
  {{-- SweetAlert2 CSS --}}
  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
  {{-- flora Editor --}}
  <link href="https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css" rel="stylesheet"
      type="text/css" />
-
-
