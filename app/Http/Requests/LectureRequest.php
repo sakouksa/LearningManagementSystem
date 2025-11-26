@@ -22,12 +22,12 @@ class LectureRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'course_id' => 'required|exists:courses,id', // ត្រូវបំពេញ និងត្រូវមានក្នុង courses
-            'section_id' => 'required|exists:course_sections,id', // ត្រូវបំពេញ និងមានក្នុង course_sections
+            'course_id' => 'required|exists:courses,id', // ត្រូវបំពេញ និងមានក្នុង table courses
+            'section_id' => 'required|exists:course_sections,id', // ត្រូវបំពេញ និងមានក្នុង table course_sections
             'lecture_title' => 'required|string|max:255', // ត្រូវបំពេញ អក្សរមិនលើស 255
             'url' => 'nullable|url|max:255', // អាចទទេ ត្រូវជា URL ប្រសិនបើបញ្ចូល
             'content' => 'required|string', // ត្រូវបំពេញ អក្សរ
-            'video_duration' => 'nullable', // អាចទទេ
+            'video_duration' => 'nullable|numeric|min:0', // អាចទទេ ត្រូវជា number ប៉ុន្មាននាទី
         ];
 
     }
