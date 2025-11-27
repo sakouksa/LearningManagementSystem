@@ -25,7 +25,7 @@ class FrontendDashboardController extends Controller
 
         $categories = Category::all();
         // Return to the frontend home view with the data
-        return view('frontend.pages.home.index', compact('all_sliders', 'all_info', 'all_categories', 'categories', 'course_category', 'course_category'));
+        return view('frontend.index', compact('all_sliders', 'all_info', 'all_categories', 'categories', 'course_category', 'course_category'));
     }
 
     public function view($slug)

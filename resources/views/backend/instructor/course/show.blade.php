@@ -1,157 +1,146 @@
-{{-- course show list --}}
-@extends('backend.instructor.master')
-@section('title', 'LMS Instructor Dashboard - Course Details')
+{{-- resources/views/backend/instructor/course/partials/show_modal_content.blade.php (English - Simple & Clean) --}}
 
-@section('content')
-    <div class="page-content">
-        {{-- breadcrumb --}}
-        @include('backend.section.breadcrumb', [
-            'title' => 'Course Details',
-            'sub_title' => 'Course-Details',
-        ])
-        {{-- end breadcrumb --}}
+<div class="card shadow-lg border-0 rounded-4">
+    <div class="card-body p-4">
 
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body p-4">
-                        {{-- Header --}}
-                        <div class="d-flex align-items-center justify-content-between mb-4">
-                            <h5 class="mb-0">Course Details</h5>
-                            <a href="{{ route('instructor.course.index') }}"
-                                class="btn btn-danger btn-sm d-flex align-items-center gap-1 px-3 py-2 shadow-sm">
-                                <i class="bi bi-arrow-left-circle fs-6"></i>
-                                <span>Back</span>
-                            </a>
-                        </div>
-                        {{-- Course Details Card --}}
-                        <div class="card shadow-sm mb-4 border-0">
-                            <div class="card-body">
-                                <div class="row g-4">
+        {{-- Row for Basic Details & Pricing --}}
+        <div class="row g-4 mb-4 pb-3 border-bottom">
 
-                                    {{-- Course Name --}}
-                                    <div class="col-md-6">
-                                        <h6 class="text-muted small mb-1">Course Name</h6>
-                                        <p class="fw-bold mb-0">{{ $course->course_name }}</p>
-                                    </div>
+            {{-- Left Column: Basic Info --}}
+            <div class="col-md-6 border-end">
+                <h5 class="mb-3 fw-bold text-primary"><i class="bi bi-book me-2"></i> Core Information</h5>
 
-                                    {{-- Course Title --}}
-                                    <div class="col-md-6">
-                                        <h6 class="text-muted small mb-1">Course Title</h6>
-                                        <p class="mb-0">{{ $course->course_title }}</p>
-                                    </div>
+                {{-- Course Name --}}
+                <div class="mb-3">
+                    <h6 class="text-muted small mb-1 fw-medium">Course Name</h6>
+                    <p class="fw-bold mb-0 text-dark">{{ $course->course_name }}</p>
+                </div>
 
-                                    {{-- Category --}}
-                                    <div class="col-md-6">
-                                        <h6 class="text-muted small mb-1">Category</h6>
-                                        <span class="badge bg-info text-dark">{{ $course->category->name ?? '-' }}</span>
-                                    </div>
+                {{-- Course Title --}}
+                <div class="mb-3">
+                    <h6 class="text-muted small mb-1 fw-medium">Short Title</h6>
+                    <p class="mb-0 text-dark">{{ $course->course_title }}</p>
+                </div>
 
-                                    {{-- Subcategory --}}
-                                    <div class="col-md-6">
-                                        <h6 class="text-muted small mb-1">Subcategory</h6>
-                                        <span class="badge bg-secondary">{{ $course->subcategory->name ?? '-' }}</span>
-                                    </div>
+                {{-- Category --}}
+                <div class="mb-3">
+                    <h6 class="text-muted small mb-1 fw-medium">Category</h6>
+                    <span class="badge bg-info text-dark rounded-pill">{{ $course->category->name ?? 'N/A' }}</span>
+                </div>
 
-                                    {{-- Selling & Discount Price --}}
-                                    <div class="col-md-4">
-                                        <h6 class="text-muted small mb-1">Selling Price</h6>
-                                        <p class="text-success fw-bold mb-0">${{ $course->selling_price }}</p>
-                                    </div>
-                                    {{-- Discount price --}}
-                                    <div class="col-md-4">
-                                        <h6 class="text-muted small mb-1">Discount Price</h6>
-                                        <p class="text-danger fw-bold mb-0">${{ $course->discount_price }}</p>
-                                    </div>
+                {{-- Subcategory --}}
+                <div>
+                    <h6 class="text-muted small mb-1 fw-medium">Subcategory</h6>
+                    <span class="badge bg-secondary rounded-pill">{{ $course->subcategory->name ?? 'N/A' }}</span>
+                </div>
+            </div>
 
-                                    <div class="col-md-4">
-                                        <h6 class="text-muted small mb-1">Discount %</h6>
-                                        <p class="text-danger fw-bold mb-0">
-                                            {{ $course->discount_price ? round((($course->selling_price - $course->discount_price) / $course->selling_price) * 100) : 0 }}%
-                                        </p>
-                                    </div>
+            {{-- Right Column: Pricing & Status --}}
+            <div class="col-md-6 ps-md-4">
+                <h5 class="mb-3 fw-bold text-success"><i class="bi bi-tag me-2"></i> Pricing & Features</h5>
 
-                                    {{-- Description --}}
-                                    <div class="col-12">
-                                        <h6 class="text-muted small mb-1">Description</h6>
-                                        <p class="border rounded p-3 bg-light mb-0">{!! $course->description !!}</p>
-                                    </div>
-
-                                    {{-- Prerequisites --}}
-                                    <div class="col-12">
-                                        <h6 class="text-muted small mb-1">Prerequisites</h6>
-                                        <p class="border rounded p-3 bg-light mb-0">{!! $course->prerequisites !!}</p>
-                                    </div>
-
-                                    {{-- Course Image --}}
-                                    <div class="col-md-6">
-                                        <h6 class="text-muted small mb-1">Course Image</h6>
-                                        @if ($course->course_image)
-                                            <img src="{{ asset($course->course_image) }}" alt="Course Image"
-                                                class="img-fluid rounded shadow-sm" style="max-height: 200px;">
-                                        @else
-                                            <p class="text-muted mb-0">N/A</p>
-                                        @endif
-                                    </div>
-
-                                    {{-- Youtube Video --}}
-                                    <div class="col-md-6">
-                                        <h6 class="text-muted small mb-1">Youtube Video</h6>
-                                        @if ($course->video_url)
-                                            <div class="ratio ratio-16x9 rounded overflow-hidden shadow-sm">
-                                                <iframe
-                                                    src="https://www.youtube.com/embed/{{ \Illuminate\Support\Str::afterLast($course->video_url, 'v=') }}"
-                                                    title="Course Video" allowfullscreen></iframe>
-                                            </div>
-                                        @else
-                                            <p class="text-muted mb-0">N/A</p>
-                                        @endif
-                                    </div>
-
-                                    {{-- Badges --}}
-                                    <div class="col-md-4">
-                                        <h6 class="text-muted small mb-1">Label</h6>
-                                        <span class="badge bg-warning text-dark">{{ ucfirst($course->label) }}</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h6 class="text-muted small mb-1">Certificate</h6>
-                                        <span class="badge bg-success">{{ ucfirst($course->certificate) }}</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h6 class="text-muted small mb-1">Resources</h6>
-                                        <span class="badge bg-info">{{ $course->resources }}</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h6 class="text-muted small mb-1">Bestseller</h6>
-                                        <span class="badge bg-danger">{{ ucfirst($course->bestseller) }}</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h6 class="text-muted small mb-1">Featured</h6>
-                                        <span class="badge bg-primary">{{ ucfirst($course->featured) }}</span>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <h6 class="text-muted small mb-1">Highest Rated</h6>
-                                        <span class="badge bg-secondary">{{ ucfirst($course->highestrated) }}</span>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
+                <div class="row g-3">
+                    {{-- Selling Price --}}
+                    <div class="col-4">
+                        <h6 class="text-muted small mb-1">Selling Price</h6>
+                        <p class="text-success fw-bolder mb-0 fs-5">${{ number_format($course->selling_price, 2) }}</p>
                     </div>
+                    {{-- Discount price --}}
+                    <div class="col-4">
+                        <h6 class="text-muted small mb-1">Discount Price</h6>
+                        @if ($course->discount_price > 0)
+                            <p class="text-danger fw-bolder mb-0 fs-5">${{ number_format($course->discount_price, 2) }}</p>
+                        @else
+                             <p class="text-muted fw-bolder mb-0 fs-5">N/A</p>
+                        @endif
+                    </div>
+                    {{-- Discount % (Calculated) --}}
+                    <div class="col-4">
+                        <h6 class="text-muted small mb-1">Discount %</h6>
+                        <p class="text-danger fw-bolder mb-0 fs-5">
+                            @php
+                                $discountPercent = 0;
+                                if ($course->discount_price && $course->selling_price > 0) {
+                                    $discountPercent = round((($course->selling_price - $course->discount_price) / $course->selling_price) * 100);
+                                }
+                            @endphp
+                            {{ $discountPercent }}%
+                        </p>
+                    </div>
+                </div>
+
+                <hr class="mt-4 mb-3">
+                
+                {{-- Badges/Features --}}
+                <h6 class="text-muted small mb-2 fw-medium">Status & Features</h6>
+                <div class="d-flex flex-wrap gap-2">
+                    <span class="badge {{ $course->label ? 'bg-warning text-dark' : 'bg-light text-muted border' }}"><i class="bi bi-bookmark-fill me-1"></i> Label: {{ ucfirst($course->label ?? 'N/A') }}</span>
+                    <span class="badge {{ $course->certificate == 1 ? 'bg-success' : 'bg-light text-muted border' }}"><i class="bi bi-award-fill me-1"></i> Certificate: {{ $course->certificate == 1 ? 'Yes' : 'No' }}</span>
+                    <span class="badge {{ $course->bestseller == 1 ? 'bg-danger' : 'bg-light text-muted border' }}"><i class="bi bi-fire me-1"></i> Bestseller: {{ $course->bestseller == 1 ? 'Yes' : 'No' }}</span>
+                    <span class="badge {{ $course->featured == 1 ? 'bg-primary' : 'bg-light text-muted border' }}"><i class="bi bi-star-fill me-1"></i> Featured: {{ $course->featured == 1 ? 'Yes' : 'No' }}</span>
                 </div>
             </div>
         </div>
+
+        {{-- Row for Description & Prerequisites --}}
+        <div class="row g-4 mb-4 pb-3 border-bottom">
+            {{-- Description --}}
+            <div class="col-lg-6">
+                <h6 class="text-muted small mb-2 fw-bold"><i class="bi bi-file-text-fill text-info me-1"></i> Description</h6>
+                <div class="border rounded p-3 bg-light" style="max-height: 200px; overflow-y: auto;">
+                    {!! $course->description ? $course->description : '<p class="text-muted fst-italic mb-0">No description provided.</p>' !!}
+                </div>
+            </div>
+
+            {{-- Prerequisites --}}
+            <div class="col-lg-6">
+                <h6 class="text-muted small mb-2 fw-bold"><i class="bi bi-tools text-warning me-1"></i> Prerequisites</h6>
+                <div class="border rounded p-3 bg-light" style="max-height: 200px; overflow-y: auto;">
+                    {!! $course->prerequisites ? $course->prerequisites : '<p class="text-muted fst-italic mb-0">No prerequisites mentioned.</p>' !!}
+                </div>
+            </div>
+        </div>
+
+        {{-- Row for Media --}}
+        <div class="row g-4">
+            {{-- Course Image --}}
+            <div class="col-md-6">
+                <h6 class="text-muted small mb-2 fw-bold"><i class="bi bi-image-fill me-1"></i> Course Image</h6>
+                @if ($course->course_image)
+                    <img src="{{ asset($course->course_image) }}" alt="Course Image"
+                        class="img-fluid rounded shadow-sm border" style="max-height: 180px; object-fit: cover; width: 100%;">
+                @else
+                    <div class="p-3 bg-light rounded text-center text-muted">N/A</div>
+                @endif
+            </div>
+
+            {{-- Youtube Video --}}
+            <div class="col-md-6">
+                <h6 class="text-muted small mb-2 fw-bold"><i class="bi bi-play-btn-fill me-1"></i> Promo Video (Youtube)</h6>
+                @if ($course->video_url)
+                    @php
+                        // Enhanced logic to extract YouTube ID
+                        $url = $course->video_url;
+                        $videoId = '';
+                        // Regex to handle standard, short, and embed URLs
+                        if (preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|\w*?v=)|youtu\.be\/)([\w-]{11})/', $url, $matches)) {
+                            $videoId = $matches[1];
+                        }
+                    @endphp
+                    @if ($videoId)
+                        <div class="ratio ratio-16x9 rounded overflow-hidden shadow-sm">
+                            <iframe
+                                src="https://www.youtube.com/embed/{{ $videoId }}"
+                                title="Course Video" allowfullscreen></iframe>
+                        </div>
+                    @else
+                        <div class="p-3 bg-light rounded text-center text-muted">Invalid YouTube URL</div>
+                    @endif
+                @else
+                    <div class="p-3 bg-light rounded text-center text-muted">N/A</div>
+                @endif
+            </div>
+        </div>
+
     </div>
-@endsection
-@push('scripts')
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // Function to extract YouTube Video ID
-            function extractYouTubeID(url) {
-                const regExp = /^.*(?:youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#&?]*).*/;
-                const match = url.match(regExp);
-                return (match && match[1].length === 11) ? match[1] : null;
-            }
-        });
-    </script>
-@endpush
+</div>

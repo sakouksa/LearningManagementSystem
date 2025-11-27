@@ -78,31 +78,36 @@
 {{-- app JS --}}
 <script src="{{ asset('backend/assets/js/app.js') }}"></script>
 {{-- end app JS --}}
-{{-- Sweet alert toast script --}}
+
+<!-- Sweet alert toast script -->
 <script>
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 4200,
+        timerProgressBar: true,
+        background: '#ffffff',
+        color: '#333',
+        customClass: {
+            popup: 'beautiful-toast'
+        },
+    });
+
     @if (session('success'))
-        Swal.fire({
-            toast: true,
-            position: 'top-end',
+        Toast.fire({
             icon: 'success',
-            title: '{{ session('success') }}',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            background: '#fff',
+            title: '{{ session('success') }}'
         });
     @elseif (session('error'))
-        Swal.fire({
-            toast: true,
-            position: 'top-end',
+        Toast.fire({
             icon: 'error',
-            title: '{{ session('error') }}',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
+            title: '{{ session('error') }}'
         });
     @endif
 </script>
+
+
 {{-- Include JS for Froala --}}
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js">
 </script>

@@ -40,7 +40,7 @@
                                 <td>{{ $index + 1 }}</td>
                                 <td>
                                     <img src="{{ $item->photo ? asset($item->photo) : asset('backend/assets/images/avatars/avatar-1.png') }}"
-                                        width="60" height="60" style="border-radius: 10px" alt="Image">
+                                        width="40" height="40" style="border-radius: 10px" alt="Image">
                                 </td>
 
                                 <td>{{ $item->name }}</td>

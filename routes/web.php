@@ -15,6 +15,7 @@ use App\Http\Controllers\backend\SubCategoryController;
 use App\Http\Controllers\backend\UserController;
 use App\Http\Controllers\backend\UserProfileController;
 use App\Http\Controllers\frontend\FrontendDashboardController;
+use App\Http\Controllers\frontend\wishlistController;
 use Illuminate\Support\Facades\Route;
 
 // start Admin login logout
@@ -39,7 +40,6 @@ Route::middleware(['auth', 'verified', 'role:admin'])->prefix('admin')->name('ad
     Route::resource('info', InfoController::class);
     // Instructor routes for admin
     Route::resource('/instructor', AdminInstructorController::class);
-
     // Control instructor
     Route::resource('/instructor', AdminInstructorController::class);
     Route::post('/update-status', [AdminInstructorController::class, 'updateStatus'])->name('instructor.status');
@@ -85,8 +85,11 @@ Route::middleware(['auth', 'verified', 'role:user'])->prefix('user')->name('user
 });
 // End start User
 
-// Frontend Route
+/* Frontend Route */
 Route::get('/', [FrontendDashboardController::class, 'home'])->name('frontend.home');
 Route::get('/course-details/{slug}', [FrontendDashboardController::class, 'view'])->name('course-details');
+/* wishlist controller */
+Route::get('/wishlist/all', [wishlistController::class, 'allWishlist']); // Ajax Route
+Route::post('/wishlist/add', [WishlistController::class, 'addToWishlist']);
 
 require __DIR__.'/auth.php';

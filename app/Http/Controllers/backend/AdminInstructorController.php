@@ -78,6 +78,7 @@ class AdminInstructorController extends Controller
 
         return redirect()->back()->with('success', 'Instructor Deleted Successfully');
     }
+
     // Update instructor status
     public function updateStatus(Request $request)
     {
@@ -92,16 +93,18 @@ class AdminInstructorController extends Controller
                 'message' => 'User status updated successfully!',
             ]);
         }
+
         // User not found
         return response()->json([
             'success' => false,
             'message' => 'User not found.',
         ]);
     }
+
     // List active instructors
     public function instructorActive(Request $request)
     {
-        $active_instructors = user::where('status', '1')->where('role', 'instructor')->latest()->get();
+        $active_instructors = User::where('status', '1')->where('role', 'instructor')->latest()->get();
 
         return view('backend.admin.instructor.active', compact('active_instructors'));
     }

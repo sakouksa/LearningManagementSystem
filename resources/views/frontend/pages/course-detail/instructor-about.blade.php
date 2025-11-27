@@ -4,9 +4,12 @@
         <div class="media media-card">
             <div class="instructor-img">
                 <a href="#" class="media-img d-block">
-                    <img class="lazy" src="{{ asset($course['user']['photo']) }}"
-                        data-src="{{ asset($course['user']['photo']) }}" alt="Avatar image">
+                    <img class="lazy"
+                        src="{{ $course['user']['photo'] ? asset($course['user']['photo']) : asset('frontend/img/avatar-1.png') }}"
+                        data-src="{{ $course['user']['photo'] ? asset($course['user']['photo']) : asset('frontend/img/avatar-1.png') }}"
+                        alt="Avatar image">
                 </a>
+
                 <ul class="generic-list-item pt-3">
                     <li><i class="la la-star mr-2 text-color-3"></i> 4.6 Instructor Rating</li>
                     <li><i class="la la-user mr-2 text-color-3"></i> 45,786 Students</li>

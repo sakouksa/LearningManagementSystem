@@ -31,30 +31,6 @@
                           <a class="nav-link dark-mode-icon" href="javascript:;"><i class='bx bx-moon'></i>
                           </a>
                       </li>
-                      <li class="nav-item dropdown dropdown-app">
-                          <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown"
-                              href="javascript:;"><i class='bx bx-grid-alt'></i></a>
-                          <div class="dropdown-menu dropdown-menu-end p-0">
-                              <div class="app-container p-2 my-2">
-                                  <div class="row gx-0 gy-2 row-cols-3 justify-content-center p-2">
-                                      <div class="col">
-                                          <a href="javascript:;">
-                                              <div class="app-box text-center">
-                                                  <div class="app-icon">
-                                                      <img src="{{ asset('backend/assets/images/app/slack.png') }}"
-                                                          width="30" alt="">
-                                                  </div>
-                                                  <div class="app-name">
-                                                      <p class="mb-0 mt-1">Slack</p>
-                                                  </div>
-                                              </div>
-                                          </a>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </li>
-
                       <li class="nav-item dropdown dropdown-large">
                           <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#"
                               data-bs-toggle="dropdown"><span class="alert-count">7</span>
@@ -137,23 +113,25 @@
               <div class="user-box dropdown px-3">
                   <a class="d-flex align-items-center nav-link dropdown-toggle gap-3 dropdown-toggle-nocaret"
                       href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      @if(auth()->user()->photo)
-                      <img src="{{auth()->user()->photo ? asset(auth()->user()->photo) : asset(auth()->user()->image) }}" width="110" height="120" class="user-img"
-                          alt="user No image">
+                      @if (auth()->user()->photo)
+                          <img src="{{ auth()->user()->photo ? asset(auth()->user()->photo) : asset(auth()->user()->image) }}"
+                              width="110" height="120" class="user-img" alt="user No image">
                       @else
-                      <img src="{{auth()->user()->photo ? asset(auth()->user()->photo) : asset('backend/assets/images/avatars/avatar-1.png') }}" width="110" height="120" class="user-img"
-                          alt="user No image">
-                          @endif
+                          <img src="{{ auth()->user()->photo ? asset(auth()->user()->photo) : asset('backend/assets/images/avatars/avatar-1.png') }}"
+                              width="110" height="120" class="user-img" alt="user No image">
+                      @endif
                       <div class="user-info">
-                          <p class="user-name mb-0">{{auth()->user()->name}}</p>
-                          <p class="designattion mb-0">{{auth()->user()->exprience}}</p>
+                          <p class="user-name mb-0">{{ auth()->user()->name }}</p>
+                          <p class="designattion mb-0">{{ auth()->user()->exprience }}</p>
                       </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
-                      <li><a class="dropdown-item d-flex align-items-center" href="{{ route('instructor.profile') }}"><i
+                      <li><a class="dropdown-item d-flex align-items-center"
+                              href="{{ route('instructor.profile') }}"><i
                                   class="bx bx-user fs-5"></i><span>Profile</span></a>
                       </li>
-                      <li><a class="dropdown-item d-flex align-items-center" href="{{ route('instructor.setting') }}"><i
+                      <li><a class="dropdown-item d-flex align-items-center"
+                              href="{{ route('instructor.setting') }}"><i
                                   class="bx bx-cog fs-5"></i><span>Settings</span></a>
                       </li>
                       <li>

@@ -100,10 +100,12 @@
                                                             class="before-price font-weight-medium">${{ $course->selling_price }}</span>
                                                     @endif
                                                 </p>
-                                                <div class="icon-element icon-element-sm shadow-sm cursor-pointer"
-                                                    title="Add to Wishlist">
+
+                                                <div class="icon-element icon-element-sm shadow-sm cursor-pointer wishlist-icon"
+                                                    title="Add to Wishlist" data-course-id="{{ $course->id }}">
                                                     <i class="la la-heart-o"></i>
                                                 </div>
+
                                             </div>
                                         </div>
                                         {{-- End Card Body --}}

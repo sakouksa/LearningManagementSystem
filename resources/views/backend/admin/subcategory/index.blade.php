@@ -12,8 +12,14 @@
         {{-- end breadcrumb --}}
         <div class="d-flex align-items-center justify-content-between mb-3">
             <h5 class="mb-0 text-uppercase">All SubCategories</h5>
-            <a href="{{ route('admin.subcategory.create') }}" class="btn btn-primary">
-                <i class="bi bi-plus-circle-fill"></i> Add SubCategory
+            <a href="{{ route('admin.subcategory.create') }}" class="d-md-flex align-items-center gap-2 btn btn-dark">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="tabler-icon tabler-icon-plus ">
+                    <path d="M12 5l0 14"></path>
+                    <path d="M5 12l14 0"></path>
+                </svg>
+                Add SubCategory
             </a>
         </div>
         <hr>
@@ -43,19 +49,51 @@
                                     </span>
                                 </td>
                                 <td>{{ $item->created_at->format('d M Y') }}</td>
-                                <td>
-                                    {{-- Edit --}}
-                                    <a href="{{ route('admin.subcategory.edit', $item->id) }}"
-                                        class="icon-btn text-primary me-2">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </a>
+                                <td class="text-center">
+                                    <div class="d-flex justify-content-center gap-1">
 
-                                    {{-- Delete --}}
-                                    <a href="javascript:void(0)" class="icon-btn text-danger delete-subcategory"
-                                        data-id="{{ $item->id }}">
-                                        <i class="bi bi-trash3-fill"></i>
-                                    </a>
+                                        {{-- 1. Edit Button (Edit Icon - Tabler Icons) --}}
+                                        <span style="cursor: pointer;">
+                                            <a role="button" tabindex="0"
+                                                href="{{ route('admin.subcategory.edit', $item->id) }}"
+                                                class="rounded-circle btn btn-ghost btn-icon btn-sm text-primary"
+                                                title="Edit Subcategory">
+                                                {{-- Tabler Icon: Edit (Same SVG as Category edit) --}}
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="tabler-icon tabler-icon-edit">
+                                                    <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1">
+                                                    </path>
+                                                    <path
+                                                        d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z">
+                                                    </path>
+                                                    <path d="M16 5l3 3"></path>
+                                                </svg>
+                                            </a>
+                                        </span>
 
+                                        {{-- 2. Delete Button (Trash Icon - Tabler Icons) --}}
+                                        <span style="cursor: pointer;">
+                                            <a role="button" tabindex="0" href="javascript:void(0)"
+                                                class="rounded-circle btn btn-ghost btn-icon btn-sm text-danger delete-subcategory"
+                                                data-id="{{ $item->id }}" title="Delete Subcategory">
+                                                {{-- Tabler Icon: Trash (Same SVG as Category delete) --}}
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="tabler-icon tabler-icon-trash">
+                                                    <path d="M4 7l16 0"></path>
+                                                    <path d="M10 11l0 6"></path>
+                                                    <path d="M14 11l0 6"></path>
+                                                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+                                                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+                                                </svg>
+                                            </a>
+                                        </span>
+                                    </div>
+
+                                    {{-- Hidden Delete Form (Still required for delete functionality) --}}
                                     <form action="{{ route('admin.subcategory.destroy', $item->id) }}" method="POST"
                                         id="delete-form-{{ $item->id }}" style="display: none;">
                                         @csrf
