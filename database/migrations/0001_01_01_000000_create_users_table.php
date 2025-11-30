@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('photo')->nullable();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
-            $table->enum('role', ['user','instructor','admin'])->default('user'); 
-            $table->enum('status',['0','1'])->default('1');
+            $table->enum('role', ['user', 'instructor', 'admin'])->default('user');
+            $table->enum('status', ['0', '1'])->default('1');
             $table->longText('bio')->nullable();
             $table->string('day')->nullable();
             $table->string('month')->nullable();
@@ -31,9 +31,9 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('country')->nullable();
             $table->longText('exprience')->nullable();
-            
-           $table->enum('gender', ['male','female','other'])->default('male');      
-            
+
+            $table->enum('gender', ['male', 'female', 'other'])->default('male');
+
             $table->rememberToken();
             $table->timestamps();
         });

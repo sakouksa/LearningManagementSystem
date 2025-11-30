@@ -5,8 +5,8 @@
                 <div class="row align-items-center">
                     <div class="col-lg-12">
                         <div class="logo-box logo--box">
-                            <a href="{{ route('user.dashboard') }}" class="logo">
-                                <img src="{{ asset('frontend/images/logo.png') }}" alt="logo">
+                            <a href="index.html" class="logo">
+                                <img src="{{asset('frontend/images/logo.png')}}" alt="logo">
 
                             </a>
                             <div class="user-btn-action">
@@ -48,8 +48,7 @@
                                                 <ul class="cart-dropdown-menu after-none">
                                                     <li class="media media-card">
                                                         <a href="lesson-details.html" class="media-img">
-                                                            <img class="mr-3"
-                                                                src="{{ asset('frontend/images/small-img-3.jpg') }}"
+                                                            <img class="mr-3" src="{{asset('frontend/images/small-img-3.jpg')}}"
                                                                 alt="Course thumbnail image">
                                                         </a>
                                                         <div class="media-body">
@@ -67,8 +66,7 @@
                                                     </li>
                                                     <li class="media media-card">
                                                         <a href="lesson-details.html" class="media-img">
-                                                            <img class="mr-3"
-                                                                src="{{ asset('frontend/images/small-img-4.jpg') }}"
+                                                            <img class="mr-3" src="{{asset('frontend/images/small-img-4.jpg')}}"
                                                                 alt="Course thumbnail image">
                                                         </a>
                                                         <div class="media-body">
@@ -86,24 +84,34 @@
                                                     </li>
                                                     <li>
                                                         <a href="my-courses.html" class="btn theme-btn w-100">Got
-                                                            to my course <i class="la la-arrow-right icon ml-1"></i></a>
+                                                            to my course <i
+                                                                class="la la-arrow-right icon ml-1"></i></a>
                                                     </li>
                                                 </ul>
                                             </li>
                                         </ul>
                                     </div><!-- end course-cart -->
 
+
                                     <!-----Ajax cart Loading-->
-                                    <div class="shop-cart mr-4" id="cart">
+
+                                    <div  class="shop-cart mr-4" id="cart">
 
                                     </div>
+
 
                                     <!---Ajax Wishlist data shown --->
                                     <div id="wishlist-course">
+                                        @include('backend.user.section.partials.wishlist')
 
                                     </div>
 
-                                    <div class="shop-cart notification-cart pr-3 mr-3 border-right border-right-gray">
+
+
+
+
+                                    <div
+                                        class="shop-cart notification-cart pr-3 mr-3 border-right border-right-gray">
                                         <ul>
                                             <li>
                                                 <p class="shop-cart-btn">
@@ -127,7 +135,8 @@
                                                                 </div>
                                                                 <div class="media-body">
                                                                     <h5>Your resume updated!</h5>
-                                                                    <span class="d-block lh-18 pt-1 text-gray fs-13">1
+                                                                    <span
+                                                                        class="d-block lh-18 pt-1 text-gray fs-13">1
                                                                         hour ago</span>
                                                                 </div>
                                                             </a>
@@ -177,8 +186,7 @@
                                                 <div class="shop-cart-btn">
                                                     <div class="avatar-xs">
                                                         <img class="rounded-full img-fluid"
-                                                            src="{{ auth()->user()->photo ? asset(auth()->user()->photo) : asset('backend/assets/images/avatars/avatar-1.png') }}"
-                                                            alt="Avatar image">
+                                                            src="{{ auth()->user()->photo ? asset(auth()->user()->photo) : asset('frontend/images/small-avatar-1.jpg')}}" alt="Avatar image">
                                                     </div>
                                                     <span class="dot-status bg-1"></span>
                                                 </div>
@@ -188,15 +196,14 @@
                                                         <a href="teacher-detail.html"
                                                             class="avatar-sm flex-shrink-0 d-block">
                                                             <img class="rounded-full img-fluid"
-                                                                src="{{ auth()->user()->photo ? asset(auth()->user()->photo) : asset('backend/assets/images/avatars/avatar-1.png') }}"
+                                                                src="{{auth()->user()->photo ? asset(auth()->user()->photo) : asset('frontend/images/small-avatar-1.jpg')}}"
                                                                 alt="Avatar image">
                                                         </a>
                                                         <div class="ml-2">
                                                             <h4><a href="teacher-detail.html"
-                                                                    class="text-black">{{ auth()->user()->name }}</a>
-                                                            </h4>
+                                                                    class="text-black">{{auth()->user()->name}}</a></h4>
                                                             <span
-                                                                class="d-block fs-14 lh-20">{{ auth()->user()->email }}</span>
+                                                                class="d-block fs-14 lh-20">{{auth()->user()->email}}</span>
                                                         </div>
                                                     </li>
                                                     <li>
@@ -270,7 +277,7 @@
                                                             </li>
 
                                                             <li>
-                                                                <a href="#">
+                                                                <a href="{{ route('user.profile') }}">
                                                                     <i class="la la-edit mr-1"></i> Edit profile
                                                                 </a>
                                                             </li>
@@ -281,16 +288,17 @@
 
 
                                                             <li>
-                                                                <a href="#"
-                                                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                                                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                                                     <i class="la la-power-off mr-1"></i> Logout
                                                                 </a>
                                                             </li>
 
-                                                            <form id="logout-form" action="{{ route('user.logout') }}"
-                                                                method="POST" style="display: none;">
+                                                            <form id="logout-form" action="{{ route('user.logout') }}" method="POST" style="display: none;">
                                                                 @csrf
                                                             </form>
+
+
+
 
 
                                                             <li>
@@ -302,7 +310,8 @@
                                                                     <span
                                                                         class="fs-17 font-weight-semi-bold d-block">Aduca
                                                                         for Business</span>
-                                                                    <span class="lh-20 d-block fs-14 text-gray">Bring
+                                                                    <span
+                                                                        class="lh-20 d-block fs-14 text-gray">Bring
                                                                         learning to your company</span>
                                                                     <span
                                                                         class="position-absolute top-0 right-0 mt-3 mr-3 fs-18 text-gray">
@@ -327,5 +336,12 @@
             </div>
         </div><!-- end container-fluid -->
     </div><!-- end header-menu-content -->
+
+
+
+
+
+
+
 
 </header><!-- end header-menu-area -->

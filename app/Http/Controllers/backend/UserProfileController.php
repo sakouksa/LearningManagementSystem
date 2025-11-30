@@ -5,8 +5,10 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PasswordUpdateRequests;
 use App\Http\Requests\ProfileRequest;
+use App\Models\wishlist;
 use App\Services\PasswordUpdateService;
 use App\Services\ProfileService;
+use Illuminate\Support\Facades\Auth;
 
 class UserProfileController extends Controller
 {
@@ -22,7 +24,13 @@ class UserProfileController extends Controller
 
     public function index()
     {
-        return view('backend.user.profile.index');
+        $user_id = Auth::id();
+
+        $wishlist = wishlist::where('user_id', $user_id)
+            ->with('course', 'course.user')
+            ->get();
+
+        return view('backend.user.profile.index' , compact('wishlist'));
     }
 
     public function store(ProfileRequest $request)
