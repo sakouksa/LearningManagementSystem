@@ -7,7 +7,7 @@
             </p>
             <ul class="cart-dropdown-menu after-none">
 
-                @forelse($wishlist as $item)
+                @forelse($Wishlist as $item)
                     <li>
                         <div class="media media-card">
                             <a href="course-details.html" class="media-img">
@@ -34,7 +34,6 @@
 
                 <a href="#" class="btn theme-btn theme-btn-sm theme-btn-transparent lh-28 w-100 mt-3">Add
                     to cart <i class="la la-arrow-right icon ml-1"></i></a>
-
 
             </ul>
         </li>

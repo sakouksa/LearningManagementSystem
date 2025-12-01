@@ -81,11 +81,12 @@ Route::middleware(['auth', 'verified', 'role:user'])->prefix('user')->name('user
     Route::post('/profile/store', [UserProfileController::class, 'store'])->name('profile.store');
     // Update password
     Route::post('/password/setting', [UserProfileController::class, 'passwordSetting'])->name('passwordSetting');
-    // Wishlist routes
-    Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
-    Route::get('/wishlist-data', [WishlistController::class, 'getWishlist'])->name('wishlist.getData');
+
+    /* Wishlist controller */
+    Route::get('wishlist', [wishlistController::class, 'index'])->name('wishlist.index');
+    Route::get('/wishlist-data', [WishlistController::class, 'getWishlist']);
+
     Route::delete('/wishlist/{id}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
-     
 
 });
 // End start User

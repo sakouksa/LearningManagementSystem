@@ -19,7 +19,13 @@ class WishlistController extends Controller
 
     public function index()
     {
-        return view('backend.user.index');
+        $user_id = Auth::id();
+
+        $wishlist = Wishlist::where('user_id', $user_id)
+            ->with('course', 'course.user')
+            ->get();
+
+        return view('backend.user.wishlist.index', compact('wishlist'));
     }
 
     public function getWishlist()
@@ -59,7 +65,7 @@ class WishlistController extends Controller
         ]);
     }
 
-    // Wishlistការបន្ថែមវគ្គសិក្សានេះ
+    // Wishlist এ কোর্স যোগ করা
     public function addToWishlist(Request $request)
     {
 
